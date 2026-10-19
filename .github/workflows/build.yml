@@ -47,7 +47,13 @@ jobs:
           find . -maxdepth 4 \( -name "settings.gradle" -o -name "settings.gradle.kts" -o -name "build.gradle" -o -name "build.gradle.kts" \) -print
 
       - name: Build APK
-        run: gradle -p VNCViewer --no-daemon assembleDebug
+        run: |
+          echo "=== Project folders ==="
+          find . -maxdepth 5 -type f \( -name "settings.gradle.kts" -o -name "settings.gradle" \) -print
+          echo "=== Build files ==="
+          find . -maxdepth 5 -type f \( -name "build.gradle.kts" -o -name "build.gradle" \) -print
+          echo "=== ZIP files ==="
+          ls -la
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
