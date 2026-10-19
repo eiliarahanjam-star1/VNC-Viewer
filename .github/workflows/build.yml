@@ -24,6 +24,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Install Android SDK packages
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
@@ -34,7 +36,7 @@ jobs:
           gradle-version: '8.9'
 
       - name: Extract project
-        run: unzip VNCViewer_AndroidStudio.zip
+        run: unzip -o VNCViewer_AndroidStudio.zip
 
       - name: Build APK
         run: gradle -p VNCViewer --no-daemon assembleDebug
