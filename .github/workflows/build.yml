@@ -35,8 +35,16 @@ jobs:
         with:
           gradle-version: '8.9'
 
+          
       - name: Extract project
-        run: unzip -o VNCViewer_AndroidStudio.zip
+        run: |
+          unzip -o VNCViewer_AndroidStudio.zip
+          echo "=== Current directory ==="
+          pwd
+          echo "=== Extracted files and folders ==="
+          ls -la
+          echo "=== Gradle project files ==="
+          find . -maxdepth 4 \( -name "settings.gradle" -o -name "settings.gradle.kts" -o -name "build.gradle" -o -name "build.gradle.kts" \) -print
 
       - name: Build APK
         run: gradle -p VNCViewer --no-daemon assembleDebug
